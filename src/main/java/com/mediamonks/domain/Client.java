@@ -62,4 +62,8 @@ public class Client extends Domain{
         }
         return null;
     }
+
+    public void updateStatus() {
+        this.enabled = !enabled;
+    }
 }

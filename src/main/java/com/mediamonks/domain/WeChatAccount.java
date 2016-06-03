@@ -34,6 +34,7 @@ public class WeChatAccount extends Domain{
     private boolean enabled;
 
     public WeChatAccount() {
+        this.enabled = true;
     }
 
     public String getAppId() {
@@ -69,8 +70,9 @@ public class WeChatAccount extends Domain{
         if(lastUpdatedAt == null){
             return true;
         }
+
         LocalDateTime dateTime = new LocalDateTime(lastUpdatedAt);
-        return Minutes.minutesBetween(dateTime, new LocalDateTime()).getMinutes() > 60;
+        return enabled && Minutes.minutesBetween(dateTime, new LocalDateTime()).getMinutes() > 60;
     }
 
 
@@ -89,5 +91,9 @@ public class WeChatAccount extends Domain{
 
     public boolean isEnabled() {
         return enabled;
+    }
+
+    public void updateStatus() {
+        this.enabled = !enabled;
     }
 }
