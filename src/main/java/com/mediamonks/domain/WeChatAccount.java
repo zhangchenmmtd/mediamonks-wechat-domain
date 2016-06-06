@@ -67,12 +67,15 @@ public class WeChatAccount extends Domain{
     }
 
     public boolean needUpdate() {
-        if(lastUpdatedAt == null){
+        if(!enabled){
+            return false;
+        }
+        if(lastUpdatedAt == null || ticket == null){
             return true;
         }
 
         LocalDateTime dateTime = new LocalDateTime(lastUpdatedAt);
-        return enabled && Minutes.minutesBetween(dateTime, new LocalDateTime()).getMinutes() > 60;
+        return Minutes.minutesBetween(dateTime, new LocalDateTime()).getMinutes() > 60;
     }
 
 
